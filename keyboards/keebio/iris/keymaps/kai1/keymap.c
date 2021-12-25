@@ -3,28 +3,28 @@
 #include "dvorak.h"
 
 #define _OS_LAYOUT( \
-      i, nextdflt,    kc_cmd,         cmd,            kc_other,       m_swi,          redo,           word,           nav_bck,        nav_fwd,        line_home,      line_end) \
-  [i] = LAYOUT( /* base layer */                                                                                                                                                                                                      \
+      i, nextdflt,    kc_cmd,         cmd,            kc_other,       m_swi,          kc_redo,        word,           kc_nav_bck,     kc_nav_fwd,     kc_line_home,   kc_line_end) \
+  [i] = LAYOUT( /* Base layer */                                                                                                                                                                                                      \
       KC_GRV,         KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           DV_EQL,         \
       KC_TAB,         DV_QUOT,        DV_COMM,        DV_DOT,         DV_P,           DV_Y,                                           DV_F,           DV_G,           DV_C,           DV_R,           DV_L,           DV_SLSH,        \
       LCTL_T(KC_ESC), DV_A,           DV_O,           DV_E,           DV_U,           DV_I,                                           DV_D,           DV_H,           DV_T,           DV_N,           DV_S,           DV_MINS,        \
       LM(i+2,m_swi),  DV_SCLN,        DV_Q,           DV_J,           DV_K,           DV_X,           KC_MPLY,        KC_RALT,        DV_B,           DV_M,           DV_W,           DV_V,           DV_Z,           KC_ENT,         \
                                                                       kc_cmd,         KC_LSFT,        MO(i+1),        MO(i+1),        KC_SPC,         KC_BSPC),                                                                       \
-  [i+1] = LAYOUT( /* "lower" layer */                                                                                                                                                                                                 \
+  [i+1] = LAYOUT( /* "FLower" layer */                                                                                                                                                                                                \
       LCTL(KC_PGUP),  KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          DV_LBRC,        DV_RBRC,        DEBUG,          \
-      LCTL(KC_PGDN),  XXXXXXX,        line_home,      KC_PGUP,        line_end,       redo,                                           nav_fwd,        KC_HOME,        KC_UP,          KC_END,         KC_MNXT,        DV_BSLS,        \
+      LCTL(KC_PGDN),  XXXXXXX,        kc_line_home,   KC_PGUP,        kc_line_end,    kc_redo,                                        kc_nav_fwd,     KC_HOME,        KC_UP,          KC_END,         KC_MNXT,        DV_BSLS,        \
       KC_ESC,         cmd(DV_A),      word(KC_LEFT),  KC_PGDN,        word(KC_RGHT),  KC_INS,                                         XXXXXXX,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_MPRV,        XXXXXXX,        \
-      kc_other,       cmd(DV_Z),      cmd(DV_X),      cmd(DV_C),      cmd(DV_V),      KC_DEL,         DF(nextdflt),   RGB_TOG,        nav_bck,        KC_F9,          KC_F10,         KC_F11,         KC_F12,         XXXXXXX,        \
+      kc_other,       cmd(DV_Z),      cmd(DV_X),      cmd(DV_C),      cmd(DV_V),      KC_DEL,         DF(nextdflt),   RGB_TOG,        kc_nav_bck,     KC_F9,          KC_F10,         KC_F11,         KC_F12,         XXXXXXX,        \
                                                                       _______,        _______,        TG(i+1),        TG(i+1),        _______,        word(KC_BSPC)),                                                                 \
-  [i+2] = LAYOUT( /* layer just for window switching */                                                                                                                                                                               \
-      LSFT(KC_TAB),   XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,                                        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        \
-      KC_TAB,         XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,                                        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        \
-      XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,                                        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        \
-      _______,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        \
-                                                                      XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX)
+  [i+2] = LAYOUT( /* Layer just for window switching, but on Windows/Linux also provides LALT versions of everything (on the off chance I'm using a layout with an AltGr key and need LALT-F4 or something). */                       \
+      LSFT(KC_TAB),   _______,        _______,        _______,        _______,        _______,                                        _______,        _______,        _______,        _______,        _______,        _______,        \
+      KC_TAB,         _______,        _______,        _______,        _______,        _______,                                        _______,        _______,        _______,        _______,        _______,        _______,        \
+      _______,        _______,        _______,        _______,        _______,        _______,                                        _______,        _______,        _______,        _______,        _______,        _______,        \
+      _______,        _______,        _______,        _______,        _______,        _______,        XXXXXXX,        XXXXXXX,        _______,        _______,        _______,        _______,        _______,        _______,        \
+                                                                      _______,        _______,        _______,        _______,        _______,        _______)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  _OS_LAYOUT(0, 4,    KC_LCTL,        LCTL,           KC_LGUI,        MOD_LALT,       LCTL(DV_Y),     LCTL,           LALT(KC_LEFT),  LALT(KC_RIGHT), KC_HOME,        KC_END), // Win
+  _OS_LAYOUT(0, 4,    KC_LCTL,        LCTL,           KC_LGUI,        MOD_LALT,       LCTL(DV_Y),     LCTL,           LALT(KC_LEFT),  LALT(KC_RIGHT), KC_HOME,        KC_END), // Win/Linux
   _OS_LAYOUT(4, 0,    KC_LGUI,        LGUI,           KC_LCTL,        MOD_LGUI,       SGUI(DV_Z),     LALT,           LGUI(KC_LEFT),  LGUI(KC_RIGHT), LCTL(KC_A),     LCTL(KC_E)), // Mac
 };
 
@@ -36,7 +36,7 @@ void _update_rgblight_for_layer(uint32_t state) {
     case 0: // Base layer (persistent layer number isn't visible here)
       rgblight_sethsv_noeeprom(132, _last_rgblight_sat, _last_rgblight_val);
       break;
-    case 1: // Lower
+    case 1: // FLower layer
       rgblight_sethsv_noeeprom(200, 255, _last_rgblight_val);
       break;
   }
