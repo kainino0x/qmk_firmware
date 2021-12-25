@@ -1,0 +1,39 @@
+#define DV_LBRC KC_MINS
+#define DV_RBRC KC_EQL
+
+#define DV_QUOT KC_Q
+#define DV_COMM KC_W
+#define DV_DOT  KC_E
+#define DV_P    KC_R
+#define DV_Y    KC_T
+#define DV_F    KC_Y
+#define DV_G    KC_U
+#define DV_C    KC_I
+#define DV_R    KC_O
+#define DV_L    KC_P
+#define DV_SLSH KC_LBRC
+#define DV_EQL  KC_RBRC
+#define DV_BSLS KC_BSLS
+
+#define DV_A    KC_A
+#define DV_O    KC_S
+#define DV_E    KC_D
+#define DV_U    KC_F
+#define DV_I    KC_G
+#define DV_D    KC_H
+#define DV_H    KC_J
+#define DV_T    KC_K
+#define DV_N    KC_L
+#define DV_S    KC_SCLN
+#define DV_MINS KC_QUOT
+
+#define DV_SCLN KC_Z
+#define DV_Q    KC_X
+#define DV_J    KC_C
+#define DV_K    KC_V
+#define DV_X    KC_B
+#define DV_B    KC_N
+#define DV_M    KC_M
+#define DV_W    KC_COMM
+#define DV_V    KC_DOT
+#define DV_Z    KC_SLSH
